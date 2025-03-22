@@ -63,7 +63,7 @@ const Log = () => {
                                 name='password'
                                 placeholder="password"
                                 className="input input-bordered" required />
-                            <button onClick={()=> setShowPass(!showPass)} type='button' className='text-lg absolute right-6 top-12.5'>
+                            <button onClick={()=> setShowPass(!showPass)} type='button' className='text-lg absolute right-6 top-12.5 text-gray-500'>
                                 {
                                     showPass? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>
                                 }
