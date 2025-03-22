@@ -1,29 +1,43 @@
 import React, { useContext, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/Authproviders';
 
 const Log = () => {
 
-    const {signInUser} = useContext(AuthContext)
+    const {signInUser, signUpWithGoogle} = useContext(AuthContext)
 
     const [showPass, setShowPass] = useState(false)
+
+    const navigate = useNavigate()
 
     const handelLogin = (e) => {
         e.preventDefault()
         const email = e.target.email.value;
         const password = e.target.password.value;
         console.log(email, password);
-
-
         
 
         signInUser(email, password)
         .then((result)=> {
             console.log(result.user)
+            e.target.reset()
+            navigate('/')
         })
         .catch(error => {
             console.log('ERROR', error)
+        })
+    }
+    const handelGoogleSignIn =()=> {
+        signUpWithGoogle()
+        .then(result => {
+            console.log("Sign in", result)
+            navigate('/')
+            
+        })
+        .catch(error => {
+            console.log("ERROR" ,error);
+            
         })
     }
 
@@ -58,8 +72,10 @@ const Log = () => {
                                 <a href="#" className="text-base my-2 link link-hover">Forgot password?</a>
                             </label>
                         </div>
-                        <div className="form-control ">
+                        <div className="form-control text-center">
                             <button className="btn btn-primary w-full">Login</button>
+                            <div className='my-2'>Or</div>
+                            <button onClick={handelGoogleSignIn} className="btn btn-ghost w-full border border-black">Sign in with google</button>
                         </div>
                         <p className='text-center'>New To this WebSite Please <span className='text-base underline text-blue-600 font-medium'><Link to='/register'>Register</Link></span></p>
                     </form>

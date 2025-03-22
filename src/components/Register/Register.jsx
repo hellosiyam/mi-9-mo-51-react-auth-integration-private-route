@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/Authproviders';
 
 const Register = () => {
@@ -8,6 +8,8 @@ const Register = () => {
     const {createUser} = useContext(AuthContext)
 
     const [showPass, setShowPass] = useState(false)
+
+    const navigate = useNavigate()
 
     const handelRegister = (e) => {
         e.preventDefault()
@@ -19,6 +21,8 @@ const Register = () => {
         createUser(email, password)
         .then(result => {
             console.log(result.user)
+            e.target.reset()    
+            navigate('/')
         })
         .catch(error => {
             console.log('ERROR', error.message)
@@ -65,8 +69,8 @@ const Register = () => {
                                 </label>
                             </div>
                         </div>
-                        <div className="form-control ">
-                            <button className="btn btn-primary w-full">Register</button>
+                        <div className="form-control">
+                            <button className="btn btn-primary w-full">Sign Up</button>
                         </div>
                         <p className='text-center'>Already have an account <span className='text-base underline text-blue-600 font-medium'><Link to='/login'>Login</Link></span></p>
                     </form>

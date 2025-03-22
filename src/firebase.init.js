@@ -6,6 +6,7 @@ import { getAuth } from "firebase/auth";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+
 const firebaseConfig = {
   apiKey: "AIzaSyCkEGEsA2v80GIcGSr5QAOSsJH9TsMqXR0",
   authDomain: "mo-51-react-auth-integration.firebaseapp.com",
@@ -18,5 +19,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+
 
 export default auth
